@@ -48,29 +48,30 @@ suite("Functional Tests", function () {
           assert.equal(res.body.name, "Cristoforo");
           assert.equal(res.body.surname, "Colombo");
           done();
-
-          // assert.fail();
         });
     });
     // #4
     test('Send {surname: "da Verrazzano"}', function (done) {
       chai
-      .request(server)
+        .request(server)
         .keepOpen()
         .put("/travellers")
         .send({
-          "surname": "da Verrazzano",
+          surname: "da Verrazzano",
         })
+        .request(server)
+        .keepOpen()
+        .put("/travellers")
         .end(function (err, res) {
           assert.equal(res.status, 200);
           assert.equal(res.type, "application/json");
           assert.equal(res.body.name, "Giovanni");
           assert.equal(res.body.surname, "da Verrazzano");
           done();
+        });
     });
   });
 });
-
 
 const Browser = require("zombie");
 
