@@ -1,35 +1,35 @@
-const chai = require('chai');
+const chai = require("chai");
 const assert = chai.assert;
 
-const server = require('../server');
+const server = require("../server");
 
-const chaiHttp = require('chai-http');
+const chaiHttp = require("chai-http");
 chai.use(chaiHttp);
 
-suite('Functional Tests', function () {
+suite("Functional Tests", function () {
   this.timeout(5000);
-  suite('Integration tests with chai-http', function () {
+  suite("Integration tests with chai-http", function () {
     // #1
-    test('Test GET /hello with no name', function (done) {
+    test("Test GET /hello with no name", function (done) {
       chai
         .request(server)
         .keepOpen()
-        .get('/hello')
+        .get("/hello")
         .end(function (err, res) {
-          assert.fail(res.status, 200);
-          assert.fail(res.text, 'hello Guest');
+          assert.equal(res.status, 200);
+          assert.equal(res.text, "hello Guest");
           done();
         });
     });
     // #2
-    test('Test GET /hello with your name', function (done) {
+    test("Test GET /hello with your name", function (done) {
       chai
         .request(server)
         .keepOpen()
-        .get('/hello?name=xy_z')
+        .get("/hello?name=Dammy")
         .end(function (err, res) {
-          assert.fail(res.status, 200);
-          assert.fail(res.text, 'hello xy_z');
+          assert.equal(res.status, 200);
+          assert.equal(res.text, "hello Dammy");
           done();
         });
     });
@@ -38,9 +38,10 @@ suite('Functional Tests', function () {
       chai
         .request(server)
         .keepOpen()
-        .put('/travellers')
+        .put("/travellers")
 
         .end(function (err, res) {
+          assert.equal(res.status, 200);
           assert.fail();
 
           done();
@@ -55,15 +56,13 @@ suite('Functional Tests', function () {
   });
 });
 
-const Browser = require('zombie');
+const Browser = require("zombie");
 
-suite('Functional Tests with Zombie.js', function () {
+suite("Functional Tests with Zombie.js", function () {
   this.timeout(5000);
 
-
-
-  suite('Headless browser', function () {
-    test('should have a working "site" property', function() {
+  suite("Headless browser", function () {
+    test('should have a working "site" property', function () {
       assert.isNotNull(browser.site);
     });
   });
