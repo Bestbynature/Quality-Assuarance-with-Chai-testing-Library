@@ -42,8 +42,17 @@ suite("Functional Tests", function () {
 
         .end(function (err, res) {
           assert.equal(res.status, 200);
+<<<<<<< HEAD
 
           assert.fail();
+=======
+          assert.equal(res.type, "application/json");
+          assert.equal(res.body.name, "Cristoforo");
+          assert.equal(res.body.surname, "Colombo");
+
+          // done();
+          // assert.fail();
+>>>>>>> 2bd5335bcc959a2a84b95840d18041a5cd9c6c3c
 
           done();
         });
